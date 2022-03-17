@@ -1,11 +1,11 @@
 <template>
 
-    <div class="col-md-6">
+    <div class="col-md-8" style="padding-left: 0px;">
         <div class="card">
             <div class="card-header">Messages</div>
 
-            <div class="card-body">
-                <div class="row">
+            <div class="card-body" style="overflow-y: scroll;height: 84vh">
+                <div class="row " >
                     <div class="col-12" v-if="message.length === 0" style="margin-bottom: 30px;text-align: center">
                         No MSGS Found
                     </div>
@@ -15,6 +15,8 @@
                         </p>
 
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-12" v-if="send_msg">
                         <form action="#" @submit.prevent="sendMsg()">
                             <input v-model="msg.text" class="form-control" type="text" name="text">
@@ -22,7 +24,6 @@
                             <input type="submit" style="float: right;margin-top: 10px" value="Send">
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>

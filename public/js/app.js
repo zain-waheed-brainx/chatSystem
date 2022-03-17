@@ -1992,13 +1992,16 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/user-list').then(function (res) {
         _this.list = res.data.data;
-        console.log(_this.list);
       });
     },
     createGroup: function createGroup() {
+      var _this2 = this;
+
       console.log(this.group);
       axios.post('/create-group', this.group).then(function (res) {
-        console.log(res);
+        _this2.$emit('refresh', res.data.data.id);
+
+        $('#exampleModal').modal('toggle');
       })["catch"](function (err) {
         return console.error(err);
       });
@@ -2042,10 +2045,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  props: {
+    refresh: Number
   },
+  mounted: function mounted() {},
   data: function data() {
     return {
       list: [],
@@ -2054,6 +2063,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.fetchList();
+  },
+  watch: {
+    refresh: function refresh(val, oldVal) {
+      this.fetchList();
+    }
   },
   methods: {
     fetchList: function fetchList() {
@@ -2097,21 +2111,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['Auth'],
-  mounted: function mounted() {
-    console.log('Component mounted.');
-    console.log(this.Auth);
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       message: [],
-      thread_id: null
+      thread_id: null,
+      refresh: 0
     };
   },
   methods: {
     msgList: function msgList(e) {
       this.message = e;
+    },
+    refreshChatList: function refreshChatList(e) {
+      this.refresh = e;
     },
     getThreadId: function getThreadId(e) {
       this.thread_id = e;
@@ -2130,6 +2159,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -37819,8 +37849,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col-md-6"},[_c('div',{staticClass:"card"},[_c('div',{staticClass:"card-header"},[_vm._v("Listing")]),_vm._v(" "),_c('div',{staticClass:"card-body"},[_c('div',{staticClass:"row"},[(_vm.list.length === 0)?_c('div',{staticClass:"col-12"},[_vm._v("\n                    No Conversations Found\n                ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.list),function(row){return _c('div',{key:row.thread_id,staticClass:"col-12"},[_c('div',{on:{"click":function($event){return _vm.messageList(row.thread_id)}}},[_vm._v("\n                        "+_vm._s(row.name)+"\n                        "),_c('hr')])])})],2)])])])}
-var staticRenderFns = []
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col-md-4",staticStyle:{"padding-right":"0px"}},[_c('div',{staticClass:"card "},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"card-body",staticStyle:{"overflow-y":"scroll","height":"84vh"}},[_c('div',{staticClass:"row"},[(_vm.list.length === 0)?_c('div',{staticClass:"col-12"},[_vm._v("\n                    No Conversations Found\n                ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.list),function(row){return _c('div',{key:row.thread_id,staticClass:"col-12"},[_c('a',{attrs:{"href":"javascript:void(0)"},on:{"click":function($event){return _vm.messageList(row.thread_id)}}},[_vm._v("\n                        "+_vm._s(row.name)+"\n                        "),_c('hr')])])})],2)])])])}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card-header"},[_vm._v("Listing\n            "),_c('i',{staticClass:"fa fa-ellipsis-v",staticStyle:{"float":"right"},attrs:{"data-toggle":"dropdown","aria-haspopup":"true","aria-expanded":"false","id":"dropdownMenuButton","aria-hidden":"true"}}),_vm._v(" "),_c('div',{staticClass:"dropdown-menu",attrs:{"aria-labelledby":"dropdownMenuButton"}},[_c('a',{staticClass:"dropdown-item",attrs:{"href":"javascript:void(0)","data-toggle":"modal","data-target":"#exampleModal"}},[_vm._v("Create Group")])])])}]
 render._withStripped = true
 
 
@@ -37837,8 +37867,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_c('group-component'),_vm._v(" "),_c('listing-component',{on:{"messages":_vm.msgList,"thread_id":_vm.getThreadId}}),_vm._v(" "),_c('message-component',{attrs:{"message":_vm.message,"thread_id":_vm.thread_id,"Auth":_vm.Auth}})],1)}
-var staticRenderFns = []
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_c('div',{staticClass:"modal fade",attrs:{"id":"exampleModal","tabindex":"-1","role":"dialog","aria-labelledby":"exampleModalLabel","aria-hidden":"true"}},[_c('div',{staticClass:"modal-dialog",attrs:{"role":"document"}},[_c('div',{staticClass:"modal-content"},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"modal-body"},[_c('group-component',{on:{"refresh":_vm.refreshChatList}})],1)])])]),_vm._v(" "),_c('listing-component',{attrs:{"refresh":_vm.refresh},on:{"messages":_vm.msgList,"thread_id":_vm.getThreadId}}),_vm._v(" "),_c('message-component',{attrs:{"message":_vm.message,"thread_id":_vm.thread_id,"Auth":_vm.Auth}})],1)}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"modal-header"},[_c('h5',{staticClass:"modal-title",attrs:{"id":"exampleModalLabel"}},[_vm._v("Create Group")]),_vm._v(" "),_c('button',{staticClass:"close",attrs:{"type":"button","data-dismiss":"modal","aria-label":"Close"}},[_c('span',{attrs:{"aria-hidden":"true"}},[_vm._v("×")])])])}]
 render._withStripped = true
 
 
@@ -37855,7 +37885,7 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col-md-6"},[_c('div',{staticClass:"card"},[_c('div',{staticClass:"card-header"},[_vm._v("Messages")]),_vm._v(" "),_c('div',{staticClass:"card-body"},[_c('div',{staticClass:"row"},[(_vm.message.length === 0)?_c('div',{staticClass:"col-12",staticStyle:{"margin-bottom":"30px","text-align":"center"}},[_vm._v("\n                    No MSGS Found\n                ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.message),function(row){return _c('div',{key:row.id,staticClass:"col-12"},[_c('p',{key:row.id,style:({textAlign:(_vm.Auth==row.from?'right':'left')})},[_vm._v("\n                        "+_vm._s(row.text)+"\n                    ")])])}),_vm._v(" "),(_vm.send_msg)?_c('div',{staticClass:"col-12"},[_c('form',{attrs:{"action":"#"},on:{"submit":function($event){$event.preventDefault();return _vm.sendMsg()}}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.msg.text),expression:"msg.text"}],staticClass:"form-control",attrs:{"type":"text","name":"text"},domProps:{"value":(_vm.msg.text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.msg, "text", $event.target.value)}}}),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.thread_id),expression:"thread_id"}],attrs:{"type":"hidden","name":"thread_id"},domProps:{"value":(_vm.thread_id)},on:{"input":function($event){if($event.target.composing){ return; }_vm.thread_id=$event.target.value}}}),_vm._v(" "),_c('input',{staticStyle:{"float":"right","margin-top":"10px"},attrs:{"type":"submit","value":"Send"}})])]):_vm._e()],2)])])])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col-md-8",staticStyle:{"padding-left":"0px"}},[_c('div',{staticClass:"card"},[_c('div',{staticClass:"card-header"},[_vm._v("Messages")]),_vm._v(" "),_c('div',{staticClass:"card-body",staticStyle:{"overflow-y":"scroll","height":"84vh"}},[_c('div',{staticClass:"row "},[(_vm.message.length === 0)?_c('div',{staticClass:"col-12",staticStyle:{"margin-bottom":"30px","text-align":"center"}},[_vm._v("\n                    No MSGS Found\n                ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.message),function(row){return _c('div',{key:row.id,staticClass:"col-12"},[_c('p',{key:row.id,style:({textAlign:(_vm.Auth==row.from?'right':'left')})},[_vm._v("\n                        "+_vm._s(row.text)+"\n                    ")])])})],2),_vm._v(" "),_c('div',{staticClass:"row"},[(_vm.send_msg)?_c('div',{staticClass:"col-12"},[_c('form',{attrs:{"action":"#"},on:{"submit":function($event){$event.preventDefault();return _vm.sendMsg()}}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.msg.text),expression:"msg.text"}],staticClass:"form-control",attrs:{"type":"text","name":"text"},domProps:{"value":(_vm.msg.text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.msg, "text", $event.target.value)}}}),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.thread_id),expression:"thread_id"}],attrs:{"type":"hidden","name":"thread_id"},domProps:{"value":(_vm.thread_id)},on:{"input":function($event){if($event.target.composing){ return; }_vm.thread_id=$event.target.value}}}),_vm._v(" "),_c('input',{staticStyle:{"float":"right","margin-top":"10px"},attrs:{"type":"submit","value":"Send"}})])]):_vm._e()])])])])}
 var staticRenderFns = []
 render._withStripped = true
 
@@ -50536,8 +50566,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Chat\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Chat\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\chatSystem\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\chatSystem\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

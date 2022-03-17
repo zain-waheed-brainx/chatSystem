@@ -41,8 +41,6 @@
                     name:'',
                     selectedValue: [],
                 }
-
-
             };
         },
         created() {
@@ -53,14 +51,14 @@
             fetchList() {
                 axios.get('/user-list').then((res) => {
                     this.list = res.data.data;
-                    console.log(this.list)
                 });
             },
             createGroup() {
                 console.log(this.group)
                 axios.post('/create-group', this.group)
                     .then((res) => {
-                        console.log(res)
+                        this.$emit('refresh', res.data.data.id)
+                        $('#exampleModal').modal('toggle');
                     })
                     .catch((err) => console.error(err));
             },
