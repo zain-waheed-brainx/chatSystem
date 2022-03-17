@@ -15,8 +15,8 @@
                 </div>
             </div>
         </div>
-         <listing-component @messages="msgList" @thread_id="getThreadId" :refresh="refresh"></listing-component>
-        <message-component :message="message" :thread_id="thread_id" :Auth="Auth"></message-component>
+         <listing-component @messages="msgList" @thread_id="getThreadId" @name="getName" :refresh="refresh"></listing-component>
+        <message-component :message="message" :thread_id="thread_id" :name="name" :Auth="Auth"></message-component>
     </div>
 </template>
 
@@ -29,6 +29,7 @@
             return {
                 message: [],
                 thread_id: null,
+                name: null,
                 refresh: 0,
             };
         },
@@ -44,6 +45,10 @@
             getThreadId(e)
             {
                 this.thread_id = e;
+            },
+            getName(e)
+            {
+                this.name = e;
             },
         }
     }
