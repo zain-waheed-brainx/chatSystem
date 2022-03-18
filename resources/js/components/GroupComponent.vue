@@ -19,7 +19,7 @@
                             </div>
 
 
-                            <input type="submit" value="Create">
+                            <input type="submit" class="btn btn-primary" value="Create">
                         </form>
                     </div>
 

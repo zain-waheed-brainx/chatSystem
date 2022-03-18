@@ -7,6 +7,7 @@ use App\Thread;
 use App\User;
 use App\UserThread;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
@@ -24,12 +25,23 @@ class ChatController extends Controller
             $query->where('user_id', '=', $id);
         })->get()->map(function ($list) {
             $message = $list->latestMessage;
+            if ($message)
+            {
+                $time = Carbon::createFromFormat('Y-m-d H:i:s', $message->created_at)->format('d-m-Y g:i A');
+            }
+            else
+            {
+                $time ='';
+            }
+
+//            dd($time);
             return [
                 'thread_id' => $list->id,
                 'name' =>$list->name?$list->name:$list->otherUser->user->name,
                 'message' => $message?$message->text:'',
                 'message_id' => $message?$message->id:0,
-                'time' => $message?$message->created_at:'0',
+                'time' => $time
+                ,
             ];
         });
         $thread = $thread->sortByDesc('message_id')->values()->all();

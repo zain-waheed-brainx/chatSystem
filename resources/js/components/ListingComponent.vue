@@ -9,7 +9,7 @@
                 </div>
             </div>
 
-            <div class="card-body" style="overflow-y: scroll;height: 84vh">
+            <div class="card-body chat-body">
                 <div class="row">
                     <div class="col-12" v-if="list.length === 0">
                         No Conversations Found
@@ -17,8 +17,13 @@
                     <div class="col-12" v-for="row in list" :key="row.thread_id">
                         <a href="javascript:void(0)" @click="messageList(row.thread_id,row.name)">
                             {{row.name}}
-                            <hr>
                         </a>
+                        <br>
+                        <p class="chat-text">{{row.message}}</p>
+                        <span class="chat-time">{{row.time}}</span>
+
+
+                        <hr style="margin-top: 30px">
 
                     </div>
                 </div>
@@ -27,7 +32,20 @@
     </div>
 
 </template>
-
+<style>
+    .chat-body{
+        overflow-y: scroll;
+        height: 84vh
+    }
+    .chat-text{
+        margin-bottom: 0;
+        padding-bottom: 10px;
+    }
+    .chat-time{
+        display: block;
+        float: right
+    }
+</style>
 <script>
     export default {
         props: {
@@ -55,7 +73,6 @@
                     this.list = res.data.data;
                     if (this.list.length>0)
                     {
-                        console.log('here');
                         this.messageList(this.list[0].thread_id,this.list[0].name)
                     }
 
