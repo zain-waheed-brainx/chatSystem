@@ -16,17 +16,24 @@ class ChatController extends Controller
     {
         $id = Auth::id();
 
-        $user = User::with(['thread.thread.threadUsers' => function ($query) use ($id) {
+        $thread = Thread::with(['latestMessage'=> function ($query) use ($id) {
+            $query->orderBy('created_at','desc');
+        },'otherUser'=> function ($query) use ($id) {
             $query->where('user_id', '!=', $id)->get();
-        }])->where('id', $id)->first();
-        $list = $user->thread->map(function ($list) {
-            $array = $list->toArray();
+        },'otherUser.user',])->whereHas('threadUsers',function ($query)  use ($id){
+            $query->where('user_id', '=', $id);
+        })->get()->map(function ($list) {
+            $message = $list->latestMessage;
             return [
-                'thread_id' => $array['thread_id'],
-                'name' => $array['thread']['name']? $array['thread']['name'] : $array['thread']['thread_users'][0]['name'],
+                'thread_id' => $list->id,
+                'name' =>$list->name?$list->name:$list->otherUser->user->name,
+                'message' => $message?$message->text:'',
+                'message_id' => $message?$message->id:0,
+                'time' => $message?$message->created_at:'0',
             ];
         });
-        return response()->json(['data'=>$list]);
+        $thread = $thread->sortByDesc('message_id')->values()->all();
+        return response()->json(['data'=>$thread]);
     }
     public function messageList($id)
     {

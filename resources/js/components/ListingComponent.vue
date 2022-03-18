@@ -55,6 +55,7 @@
                     this.list = res.data.data;
                     if (this.list.length>0)
                     {
+                        console.log('here');
                         this.messageList(this.list[0].thread_id,this.list[0].name)
                     }
 

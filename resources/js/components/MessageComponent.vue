@@ -4,24 +4,25 @@
         <div class="card">
             <div class="card-header" :class="{headerHeight:!chat_open}" ><div v-if="chat_open"><img  :src="'/images/user.png'" style="height: 50px"><i style="margin-left: 10px">{{name}}</i> </div><p v-else style="margin-top: 10px;margin-left: 10px">Messages</p></div>
 
-            <div class="card-body"  style="background-image: url('/images/chat_bg.jpg');">
-                <div class="col-12" v-if="message.length === 0" style="margin-bottom: 30px;text-align: center">
+            <div class="card-body chat"  style="background-image: url('/images/chat_bg.jpg');height: 85vh">
+                <div class="col-12" v-if="message.length === 0" style="text-align: center">
                     No MSGS Found
                 </div>
                 <ul style="overflow-y: scroll;height: 70vh">
 
                     <li :class="{him:Auth!=row.from,me:Auth==row.from}" v-for="row in message" :key="row.id">
-
-                            {{row.text}}
-
+                     {{row.text}}
                     </li>
                 </ul>
-                <div class="row" >
+                <div class="row" style="margin-top: 10px">
                     <div class="col-12" >
-                        <form action="#" @submit.prevent="sendMsg()" v-if="send_msg">
-                            <input v-model="msg.text" class="form-control" type="text" name="text">
-                            <input v-model="thread_id" type="hidden"  name="thread_id">
-                            <input type="submit" style="float: right;margin-top: 10px" value="Send">
+                        <form class="form-inline" action="#" @submit.prevent="sendMsg()" v-if="send_msg">
+                            <div class="form-group">
+                                <input v-model="thread_id" type="hidden"  name="thread_id">
+                                <input v-model="msg.text" class="form-control" type="text" name="text" style="width: 125vh">
+                            </div>
+                            <button type="submit" class="btn btn-success" >Send</button>
+
                         </form>
                     </div>
                 </div>
@@ -35,12 +36,12 @@
     .headerHeight{
         height: 74px
     }
-    ul{
+   .chat ul{
         list-style: none;
         margin: 0;
         padding: 0;
     }
-    ul li{
+    .chat ul li{
         display:inline-block;
         clear: both;
         padding: 20px;
@@ -48,27 +49,27 @@
         margin-bottom: 2px;
         font-family: Helvetica, Arial, sans-serif;
     }
-    .him{
+    .chat .him{
         background: #eee;
         float: left;
     }
 
-    .me{
+    .chat .me{
         float: right;
         background: #0084ff;
         color: #fff;
     }
 
-    .him + .me{
+    .chat .him + .me{
         border-bottom-right-radius: 5px;
     }
 
-    .me + .me{
+    .chat .me + .me{
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
     }
 
-    .me:last-of-type {
+    .chat .me:last-of-type {
         border-bottom-right-radius: 30px;
     }
 </style>
