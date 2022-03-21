@@ -19,11 +19,11 @@
                             {{row.name}}
                         </a>
                         <br>
-                        <p class="chat-text">{{row.message}}</p>
+                        <b class="chat-text">{{row.message}}</b>
                         <span class="chat-time">{{row.time}}</span>
 
 
-                        <hr style="margin-top: 30px">
+                        <hr style="margin-top: 15px">
 
                     </div>
                 </div>

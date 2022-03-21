@@ -16,7 +16,10 @@
 
                                     <li :class="{him:Auth!=row.from,me:Auth==row.from}" v-for="row in message"
                                         :key="row.id">
+                                        <b v-if="Auth!=row.from" style="color: black">{{row.sender.name}}</b> <br v-if="Auth!=row.from">
                                         {{row.text}}
+                                        <br>
+                                        <i style="float: right;color: black"> {{row.time}}</i>
                                     </li>
                                 </ul>
                         </div>
@@ -43,8 +46,6 @@
     }
 
     .scrollable {
-        /*position: absolute;*/
-        /*height: calc(100% - 30px);*/
         width: 100%;
         overflow-y: auto;
     }
@@ -122,6 +123,7 @@
         },
         updated() {
             this.send_msg = true;
+            $(".scrollable").scrollTop($(".scrollable")[0].scrollHeight);
         },
         watch: {
             send_msg: function (val, oldVal) {

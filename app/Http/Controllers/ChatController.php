@@ -9,6 +9,7 @@ use App\UserThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ChatController extends Controller
 {
@@ -28,17 +29,19 @@ class ChatController extends Controller
             if ($message)
             {
                 $time = Carbon::createFromFormat('Y-m-d H:i:s', $message->created_at)->format('d-m-Y g:i A');
+                $text = Str::limit($message->text,30);
             }
             else
             {
                 $time ='';
+                $text = '';
             }
 
 //            dd($time);
             return [
                 'thread_id' => $list->id,
                 'name' =>$list->name?$list->name:$list->otherUser->user->name,
-                'message' => $message?$message->text:'',
+                'message' => $text,
                 'message_id' => $message?$message->id:0,
                 'time' => $time
                 ,
@@ -49,7 +52,14 @@ class ChatController extends Controller
     }
     public function messageList($id)
     {
-        $messages = Message::where('thread_id',$id)->get();
+        $messages = Message::with('sender')->where('thread_id',$id)->get()->map(function ($msg) {
+            return [
+                'text' =>$msg->text,
+                'sender' =>$msg->sender,
+                'from' =>$msg->from,
+                'time' =>Carbon::createFromFormat('Y-m-d H:i:s', $msg->created_at)->format('d-m-Y g:i A'),
+            ];
+        });
         return response()->json(['data'=>$messages]);
     }
     public function userList(Request $request)
