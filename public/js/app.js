@@ -2259,6 +2259,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     message: Array,
@@ -6700,7 +6729,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.headerHeight{\n     height: 74px\n}\n.chat ul{\n     list-style: none;\n     margin: 0;\n     padding: 0;\n}\n.chat ul li{\n     display:inline-block;\n     clear: both;\n     padding: 20px;\n     border-radius: 30px;\n     margin-bottom: 2px;\n     font-family: Helvetica, Arial, sans-serif;\n}\n.chat .him{\n     background: #eee;\n     float: left;\n}\n.chat .me{\n     float: right;\n     background: #0084ff;\n     color: #fff;\n}\n.chat .him + .me{\n     border-bottom-right-radius: 5px;\n}\n.chat .me + .me{\n     border-top-right-radius: 5px;\n     border-bottom-right-radius: 5px;\n}\n.chat .me:last-of-type {\n     border-bottom-right-radius: 30px;\n}\n", ""]);
+exports.push([module.i, "\n.headerHeight {\n    height: 74px\n}\n.scrollable {\n    /*position: absolute;*/\n    /*height: calc(100% - 30px);*/\n    width: 100%;\n    overflow-y: auto;\n}\n.fixed {\n    height: 100%;\n    max-height: 345px;\n    position: fixed;\n}\n.chat {\n    height: 85vh;\n    background-image: url('/images/chat_bg.jpg');\n    -webkit-padding-before:0;\n            padding-block-start:0;\n    -webkit-padding-after:2.2rem;\n            padding-block-end:2.2rem;\n    padding-inline : 0;\n}\n.chat ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n}\n.chat ul li {\n    display: inline-block;\n    clear: both;\n    padding: 20px;\n    border-radius: 30px;\n    margin-bottom: 2px;\n    font-family: Helvetica, Arial, sans-serif;\n}\n.chat .him {\n    background: #eee;\n    float: left;\n}\n.chat .me {\n    float: right;\n    background: #0084ff;\n    color: #fff;\n}\n.chat .him + .me {\n    border-bottom-right-radius: 5px;\n}\n.chat .me + .me {\n    border-top-right-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\n.chat .me:last-of-type {\n    border-bottom-right-radius: 30px;\n}\n", ""]);
 
 // exports
 
@@ -38650,7 +38679,7 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col-md-8",staticStyle:{"padding-left":"0px"}},[_c('div',{staticClass:"card"},[_c('div',{staticClass:"card-header",class:{headerHeight:!_vm.chat_open}},[(_vm.chat_open)?_c('div',[_c('img',{staticStyle:{"height":"50px"},attrs:{"src":'/images/user.png'}}),_c('i',{staticStyle:{"margin-left":"10px"}},[_vm._v(_vm._s(_vm.name))])]):_c('p',{staticStyle:{"margin-top":"10px","margin-left":"10px"}},[_vm._v("Messages")])]),_vm._v(" "),_c('div',{staticClass:"card-body chat",staticStyle:{"background-image":"url('/images/chat_bg.jpg')","height":"85vh"}},[(_vm.message.length === 0)?_c('div',{staticClass:"col-12",staticStyle:{"text-align":"center"}},[_vm._v("\n                No MSGS Found\n            ")]):_vm._e(),_vm._v(" "),_c('ul',{staticStyle:{"overflow-y":"scroll","height":"70vh"}},_vm._l((_vm.message),function(row){return _c('li',{key:row.id,class:{him:_vm.Auth!=row.from,me:_vm.Auth==row.from}},[_vm._v("\n                 "+_vm._s(row.text)+"\n                ")])}),0),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"margin-top":"10px"}},[_c('div',{staticClass:"col-12"},[(_vm.send_msg)?_c('form',{staticClass:"form-inline",attrs:{"action":"#"},on:{"submit":function($event){$event.preventDefault();return _vm.sendMsg()}}},[_c('div',{staticClass:"form-group"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.thread_id),expression:"thread_id"}],attrs:{"type":"hidden","name":"thread_id"},domProps:{"value":(_vm.thread_id)},on:{"input":function($event){if($event.target.composing){ return; }_vm.thread_id=$event.target.value}}}),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.msg.text),expression:"msg.text"}],staticClass:"form-control",staticStyle:{"width":"125vh"},attrs:{"type":"text","name":"text"},domProps:{"value":(_vm.msg.text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.msg, "text", $event.target.value)}}})]),_vm._v(" "),_c('button',{staticClass:"btn btn-success",attrs:{"type":"submit"}},[_vm._v("Send")])]):_vm._e()])])])])])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col-md-8",staticStyle:{"padding-left":"0px"}},[_c('div',{staticClass:"card h-100"},[_c('div',{staticClass:"card-header",class:{headerHeight:!_vm.chat_open}},[(_vm.chat_open)?_c('div',[_c('img',{staticStyle:{"height":"50px"},attrs:{"src":'/images/user.png'}}),_c('i',{staticStyle:{"margin-left":"10px"}},[_vm._v(_vm._s(_vm.name))])]):_c('p',{staticStyle:{"margin-top":"10px","margin-left":"10px"}},[_vm._v("Messages")])]),_vm._v(" "),_c('div',{staticClass:"d-flex flex-column card-body chat"},[_c('div',{staticClass:"p-2 scrollable h-100"},[(_vm.message.length === 0)?_c('div',{staticStyle:{"text-align":"center"}},[_vm._v("\n                            No MSGS Found\n                        ")]):_c('ul',_vm._l((_vm.message),function(row){return _c('li',{key:row.id,class:{him:_vm.Auth!=row.from,me:_vm.Auth==row.from}},[_vm._v("\n                                    "+_vm._s(row.text)+"\n                                ")])}),0)]),_vm._v(" "),_c('div',{staticClass:"p-1"},[(_vm.send_msg)?_c('form',{staticClass:"form-inline w-100",attrs:{"action":"#"},on:{"submit":function($event){$event.preventDefault();return _vm.sendMsg()}}},[_c('div',{staticClass:"form-group",staticStyle:{"width":"calc(100% - 60px)"}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.thread_id),expression:"thread_id"}],attrs:{"type":"hidden","name":"thread_id"},domProps:{"value":(_vm.thread_id)},on:{"input":function($event){if($event.target.composing){ return; }_vm.thread_id=$event.target.value}}}),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.msg.text),expression:"msg.text"}],staticClass:"form-control w-100",attrs:{"type":"text","name":"text"},domProps:{"value":(_vm.msg.text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.msg, "text", $event.target.value)}}})]),_vm._v(" "),_c('button',{staticClass:"btn btn-success",attrs:{"type":"submit"}},[_vm._v("Send")])]):_vm._e()])])])])}
 var staticRenderFns = []
 render._withStripped = true
 
